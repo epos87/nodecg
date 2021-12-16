@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<!-- required libraries --> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
+<script src="https://kit.fontawesome.com/1520623b67.js" crossorigin="anonymous"></script>
+<link href="//cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css" />
+<!-- meta -->
+<title>C&amp;C PowerHour - Player 1 Dashboard</title>
+<meta name="copyright" content="©2021 CNCPH, LLC">
+<meta name="title" content="C&C PowerHour Dashboard">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/ico" href="imgs/favicon.png">
+<!-- custom files -->
+<link href="styles/dashboard.css" rel="stylesheet" type="text/css">
+<script src="scripts/toggles.js"></script> 
+<!--old files-->
+</head>
+<body>
+<table style="border-spacing: 0px; padding: 0px">
+  <tr>
+    <td valign="top" id="sidebar"><table id="sideboard">
+        <tr>
+          <td colspan="4"><iframe frameborder="0" width="302" height="544" scrolling="no" id="dashboard" src="http://99.59.251.112:9090/bundles/CNCPH/dashboard/p1.html?standalone=true"></iframe></td>
+        </tr>
+        <tr>
+          <td colspan="4">
+			  <table id="cameras">
+              <tr>
+                <td colspan="4"><div class="wrap">
+                    <h2>PLAYMAT CAMERA</h2>
+                    <iframe allow="camera; microphone" class="addcam-iframe" name="playmatcamframe" id="playmatcamframe" frameborder="0"></iframe>
+                  </div></td>
+              </tr>
+              <tr>
+                <td colspan="8"><table width="100%">
+                    <tr>
+                      <td width="10%" align="center"><button onclick="refreshIframe1();" class="blue" style="font-size:8px; letter-spacing: normal"><i class="fas fa-sync"></i></button></td>
+                      <td width="10%" align="center"><button onclick="toggleMic();" class="icon micon green" style="font-size:8px; letter-spacing: normal" id="buttonMic"></button></td>
+                      <td width="10%" align="center"><button onclick="toggleCam1();" class="icon camon green" style="font-size:8px; letter-spacing: normal" id="buttonCam1"></button></td>
+                      <td width="50%" align="center"><button id="facetoggle" class="yellow">SHOW/HIDE FACECAM</button></td>
+                      <td width="10%" align="center"><button onclick="toggleCam2();" class="icon camon green faceframe" style="font-size:8px; letter-spacing: normal" id="buttonCam2"></button></td>
+                      <td width="10%" align="center"><button onclick="refreshIframe2();" class="blue faceframe" style="font-size:8px; letter-spacing: normal; width:22px" id="refresh2"><i class="fas fa-sync"></i></button></td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <tr id="">
+                <td colspan="4"><div class="wrap faceframe">
+                    <h2>FACE CAMERA</h2>
+                    <iframe allow="camera; microphone" class="addcam-iframe" name="facecamframe" id="facecamframe" frameborder="0"></iframe>
+                  </div></td>
+              </tr>
+            </table></td>
+        </tr>
+      </table></td>
+    <td id="obs"><iframe class="responsive-iframe" name="streamfeed" id="preview"></iframe>
+      <div id="lpopouts">
+        <iframe frameborder="0" width="525" height="516" scrolling="no" id="popouts" src="http://99.59.251.112:9090/bundles/CNCPH/dashboard/1popouts.html?standalone=true"></iframe>
+      </div>
+      <div id="quality">
+        <table>
+          <tr>
+            <td width="15px"><button class="red" onclick="highq();" id="highq" style="font-size:8px; letter-spacing: normal">H</button></td>
+            <td width="15px"><button class="green" onclick="medq();" id="medq" style="font-size:8px; letter-spacing: normal">M</button></td>
+            <td width="15px"><button class="red" onclick="lowq();" id="lowq" style="font-size:8px; letter-spacing: normal">L</button></td>
+		    <td width="15px"><button class="icon muteon green" id="buttonMute" onclick="toggleMute();" style="font-size:8px; letter-spacing: normal"></button></td>
+          </tr>
+        </table>
+      </div></td>
+  </tr>
+</table>
+</body>
+</html>

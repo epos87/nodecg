@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<!-- required libraries --> 
+<script src="https://kit.fontawesome.com/1520623b67.js" crossorigin="anonymous"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link href="//cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<!-- meta -->
+<title>Director Dashboard - C&amp;C PowerHour</title>
+<meta name="copyright" content="©2021 CNCPH, LLC">
+<meta name="title" content="C&C PowerHour Dashboard">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/ico" href="img/favicon.png">
+<!-- custom files -->
+<link href="styles/popouts.css" rel="stylesheet">
+<script src="scripts/toggles.js"></script> 
+<script src="scripts/info.js"></script> 
+<script src="scripts/scry.js"></script> 
+<script src="scripts/npopinputs.js"></script> 
+<script src="scripts/popinputs.js"></script>
+</head>
+<body>
+<div id="lpopouts">
+  <div id="scrywrap" class="poptog" width="302px">
+    <table cellpadding="5px">
+      <tr>
+        <td align="center" colspan="3"><input type="text" id="cardimage" autocomplete="off" placeholder="Search Scryfall"></td>
+      </tr>
+      <tr>
+        <td colspan="3"><a href="#" id="imgref" target="_blank"><img id="cardread" src="../graphics/mtg-card-back.png" alt="magic card"></a></td>
+      </tr>
+      <tr><td></td>
+        <td width="100px"><button onclick="flipcard();" id="flipCard" class="reset" style="font-size:9px; letter-spacing: normal">Flip Card <i class="fas fa-sync"></i></button></td><td></td>
+      </tr>
+    </table>
+  </div>
+  <div id="planwrap" class="poptog">
+    <table cellpadding="5px">
+      <tr>
+        <td valign="middle" align="center"><input type="text" id="planeimage" autocomplete="off" placeholder="Search Planes"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><img id="planereader" src="../graphics/planechase.png" alt="magic card" class="lplanereader" style="top: -32px"></td>
+        <td><br>
+          &nbsp;<br>
+          &nbsp;
+          <button type="button" id="roll-button" class="reset" onclick="rollplane()">Roll <i class="fas fa-sync"></i></button>
+          <br>
+          &nbsp;<br>
+          &nbsp;
+          <button type="button" id="roll-chaos" class="reset" onclick="rollchaos()">Roll <i class="ms ms-chaos"></i></button></td>
+      </tr>
+    </table>
+  </div>
+  <div id="dicewrap" class="poptog" width="150px">
+    <table class="">
+      <tr>
+        <td><button type="button" id="roll-d62" class="reset" onclick="d62()">Roll 2d6 <i class="fas fa-sync"></i></button></td>
+      </tr>
+      <tr>
+        <td><button type="button" id="roll-all" class="reset" onclick="rollall()">Roll All <i class="fas fa-sync"></i></button></td>
+      </tr>
+      <tr>
+        <td><button type="button" id="flip-coin2" class="reset" onclick="coin2()">Flip Coin <i class="fas fa-sync"></i></button></td>
+      </tr>
+    </table>
+  </div>
+  <div id="festwrap" class="poptog">
+    <table cellpadding="5px">
+      <tr>
+        <td class="framewrap2"><iframe src="https://festify.us/party/-MTcStTNyqyVNf3WvMNI" class="festframe" name="festframe"></iframe></td>
+      </tr>
+    </table>
+  </div>
+  <div id="resetwrap" class="poptog">
+    <table cellpadding="5px">
+      <tbody>
+        <tr>
+          <td><table width="100%">
+              <tr>
+                <td><button onclick="p1inforeset()" class="reset" style="font-size:12px">P1 Reset</button></td>
+                <td><button onclick="p2inforeset()" class="reset" style="font-size:12px">P2 Reset</button></td>
+                <td><button onclick="p3inforeset()" class="reset" style="font-size:12px">P3 Reset</button></td>
+                <td><button onclick="p4inforeset()" class="reset" style="font-size:12px">P4 Reset</button></td>
+              </tr>
+            </table></td>
+        </tr>
+        <tr>
+          <td><table width="100%">
+              <tr>
+                <td><button onclick="lifereset()" class="reset" style="font-size:12px">Life Reset</button></td>
+              </tr>
+            </table></td>
+        </tr>
+        <tr>
+          <td><table width="100%">
+              <tr>
+                <td><button onclick="p1clear()" class="reset" style="font-size:12px">P1 Clear</button></td>
+                <td><button onclick="p3clear()" class="reset" style="font-size:12px">P3 Clear</button></td>
+                <td><button onclick="p4clear()" class="reset" style="font-size:12px">P4 Clear</button></td>
+              </tr>
+            </table></td>
+        </tr>
+        <tr>
+          <td><table width="100%">
+              <tr>
+                <td><button onclick="p1clay()" class="reset" style="font-size:12px">Clay - P1</button></td>
+                <td><button onclick="p3clay()" class="reset" style="font-size:12px">Clay - P3</button></td>
+                <td><button onclick="p4clay()" class="reset" style="font-size:12px">Clay - P4</button></td>
+              </tr>
+            </table></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div id="lpopbuttons">
+  <table>
+    <tr>
+      <td><button class="poptoggles" type="button" onClick="poptoggle(event, 'scrywrap');" style="background-image: url(img/scryfall.png);"></button></td>
+    </tr>
+    <tr>
+      <td><button class="poptoggles" type="button" onClick="poptoggle(event, 'planwrap');" style="background-image: url(img/chaos.jpg);"></button></td>
+    </tr>
+    <tr>
+      <td><button class="poptoggles" type="button" onClick="poptoggle(event, 'dicewrap');" style="background-image: url(img/dice.png);"></button></td>
+    </tr>
+    <tr>
+      <td><button class="poptoggles" type="button" onClick="poptoggle(event, 'festwrap');" style="background-image: url(img/fest.png);"></button></td>
+    </tr>
+    <tr>
+      <td><button class="poptoggles" type="button" onClick="poptoggle(event, 'resetwrap');" style="background-color: #999; color: #222; font-size: 16px;"><i class="fas fa-sync"></i></button></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+    </tr>
+    <tr align="center">
+      <td align="center"><h2><i class="ms ms-p"></i></h2></td>
+    </tr>
+    <tr>
+      <td align="center"><input type="checkbox" id="poisonyes" class="p1c" onMouseUp="poisonyes()"></td>
+    </tr>
+  </table>
+</div>
+<script src="scripts/findplane.js"></script> 
+<script src="scripts/findcards.js"></script> 
+<script src="scripts/popreturns.js"></script> 
+<script src="scripts/npopreturns.js"></script>
+</body>
+</html>

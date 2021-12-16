@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<!-- required libraries --> 
+<script src="https://kit.fontawesome.com/1520623b67.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
+<link href="//cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<!-- meta -->
+<title>C&amp;C PowerHour - Player Select</title>
+<meta name="copyright" content="©2021 CNCPH, LLC">
+<meta name="title" content="C&C PowerHour Dashboard">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/ico" href="img/favicon.png">
+<!-- custom files -->
+<link href="styles/style.css" rel="stylesheet">
+</head>
+<body>
+	<table id="centered_div">
+		<tr>
+			<td colspan="4"><h1>Who are you?</h1></td>
+		</tr>
+		<tr>
+			<td><button class="p1 select" onclick="redirect('1')"><h2>Player 1</h2></button></td>
+			<td><button class="p2 select" onclick="redirect('2')"><h2>Player 2</h2></button></td>
+			<td><button class="p3 select" onclick="redirect('3')"><h2>Player 3</h2></button></td>
+			<td><button class="p4 select" onclick="redirect('4')"><h2>Player 4</h2></button></td>
+		</tr>
+		<tr><td colspan="4"><div id="noplayer"></div></td></tr>
+	</table>
+	<script src="scripts/redirect.js"></script>
+</body>
+</html>

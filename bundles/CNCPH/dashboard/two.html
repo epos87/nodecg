@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<!-- required libraries --> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
+<script src="https://kit.fontawesome.com/1520623b67.js" crossorigin="anonymous"></script>
+<link href="//cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css" />
+<!-- meta -->
+<title>C&amp;C PowerHour - Two-Player Dashboard</title>
+<meta name="copyright" content="©2021 CNCPH, LLC">
+<meta name="title" content="C&C PowerHour Dashboard">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/ico" href="favicon.png">
+<link itemprop="thumbnailUrl" href="thumbnail.png">
+<!-- custom files -->
+<link href="styles/style-2p.css" rel="stylesheet">
+<script src="scripts/lifetotals2p.js"></script>
+</head>
+<body>
+<table class="dashboard">
+  <tr>
+    <td align="center"><h2>P1 LIFE</h2></td>
+    <td align="center"><h2>P2 LIFE</h2></td>
+  </tr>
+  <tr>
+    <td width="150px"><table class="tp1" width="100%">
+        <tr>
+          <td><button onclick="p1lifeup1()" class="p1"><i class="fas fa-arrow-up"></i> 1</button></td>
+          <td><button onclick="p1lifeup5()" class="p1"><i class="fas fa-arrow-up"></i> 5</button></td>
+          <td><button onclick="p1drain()" class="p1">Dr <i class="fas fa-plus"></i></button></td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center"><input type="number" id="p1life" class="p1" autocomplete="off" onBlur="updp1life()"></td>
+        </tr>
+        <tr>
+          <td><button onclick="p1lifedown1()" class="p1"><i class="fas fa-arrow-down"></i> 1</button></td>
+          <td><button onclick="p1lifedown5()" class="p1"><i class="fas fa-arrow-down"></i> 5</button></td>
+          <td><button onclick="p2drain()" class="p1">Dr <i class="fas fa-minus"></i></button></td>
+        </tr>
+      </table></td>
+    <td width="150px"><table class="tp3" width="100%">
+        <tr>
+          <td><button onclick="p2lifeup1()" class="p3"><i class="fas fa-arrow-up"></i> 1</button></td>
+          <td><button onclick="p2lifeup5()" class="p3"><i class="fas fa-arrow-up"></i> 5</button></td>
+          <td><button onclick="p2drain()" class="p3">Dr <i class="fas fa-plus"></i></button></td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center"><input type="number" id="p2life" class="p3" autocomplete="off" onBlur="updp2life()"></td>
+        </tr>
+        <tr>
+          <td><button onclick="p2lifedown1()" class="p3"><i class="fas fa-arrow-down"></i> 1</button></td>
+          <td><button onclick="p2lifedown5()" class="p3"><i class="fas fa-arrow-down"></i> 5</button></td>
+          <td><button onclick="p1drain()" class="p3">Dr <i class="fas fa-minus"></i></button></td>
+        </tr>
+      </table></td>
+  </tr>
+	<tr>
+		<td><table class="tpoison" width="100%">
+        <tr>
+          <td width="30%"><button onclick="p1poisionup()" class="poison"><i class="fas fa-arrow-up"></i></button></td>
+          <td align="center" id="p1poison"></td>
+          <td width="30%"><button onclick="p1poisiondown()" class="poison"><i class="fas fa-arrow-down"></i></button></td>
+        </tr>
+      </table></td>
+	<td><table class="tpoison" width="100%">
+        <tr>
+          <td width="30%"><button onclick="p2poisionup()" class="poison"><i class="fas fa-arrow-up"></i></button></td>
+          <td align="center" id="p2poison"></td>
+          <td width="30%"><button onclick="p2poisiondown()" class="poison"><i class="fas fa-arrow-down"></i></button></td>
+        </tr>
+		</table></td></tr>
+</table>
+<script src="scripts/notnode2p.js"></script>
+</body>
+</html>

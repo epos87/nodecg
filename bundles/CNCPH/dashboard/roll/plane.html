@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Dice Roll</title>
+    <link rel="stylesheet" href="plane.css" />
+	<link href="//cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css" /> 
+	<script src="https://kit.fontawesome.com/1520623b67.js" crossorigin="anonymous"></script> 
+  </head>
+  <body>
+	  <div>
+    <button type="button" id="roll-button">Roll <i class="fas fa-sync"></i></button></div>
+    <div class="dice">
+      <ol class="die-list even-roll" data-roll="1" id="die-1">
+        <li class="die-item" data-side="1"><span class="plane ms ms-planeswalker"></span></li>
+        <li class="die-item" data-side="2"></li>
+        <li class="die-item" data-side="3"></li>
+        <li class="die-item" data-side="4"></li>
+        <li class="die-item" data-side="5"> </li>
+        <li class="die-item" data-side="6"><span class="chaos ms ms-chaos"></span></li>
+      </ol>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

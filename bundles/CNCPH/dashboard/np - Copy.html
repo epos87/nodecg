@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<!-- required libraries --> 
+<script src="https://kit.fontawesome.com/1520623b67.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
+<link href="//cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<!-- meta -->
+<title>Director Dashboard - C&amp;C PowerHour</title>
+<meta name="copyright" content="©2021 CNCPH, LLC">
+<meta name="title" content="C&C PowerHour Dashboard">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/ico" href="img/favicon.png">
+<!-- custom files -->
+<link href="styles/style.css" rel="stylesheet">
+<script src="scripts/lifetotals.js"></script> 
+<script src="scripts/p1-info.js"></script> 
+<script src="scripts/p2-info.js"></script> 
+<script src="scripts/p3-info.js"></script> 
+<script src="scripts/p4-info.js"></script> 
+<script src="scripts/toggles.js"></script> 
+<script src="scripts/inputs.js"></script> 
+<script src="scripts/findcommanders.js"></script>
+</head>
+<body>
+<table>
+	<tr>
+		<td><table width="100%"><tr>
+	  <td><button id="p1hidet" type="button" onclick="show('p1hide');">SHOW P1</button></td>
+	  <td><button id="p2hidet" type="button" onclick="show('p2hide');">SHOW P2</button></td>
+	  <td><button id="p3hidet" type="button" onclick="show('p3hide');">SHOW P3</button></td>
+	  <td><button id="p4hidet" type="button" onclick="show('p4hide');">SHOW P4</button></td></tr></table></td>
+	</tr>
+	<tr id="p1hide" class="hidden">
+	  <td class="sidebar1 node" valign="top" colspan="4"><table class="dashboard">
+		  <tr valign="top" height="126px">
+			<td align="center" colspan="8"><table class="tp1" width="100%">
+				<tr>
+				  <td align="center" width="22%" colspan="3"><h2>P1</h2></td>
+				  <td align="center" width="60%"><input type="text" id="p1cncname" class="p1inputbox" placeholder="PLAYER 1 NAME" autocomplete="off" tabindex="1" onBlur="updp1name()"></td>
+				  <td align="center" width="18%"><input type="text" id="p1cncpro1" class="p1inputbox pronouns" placeholder="they" autocomplete="off" tabindex="2" onBlur="updp1pro1()"></td>
+				</tr>
+				<tr>
+				  <td align="center" width="10%"><h2><i class="fab fa-twitch"></i></h2></td>
+				  <td align="center"><label class="switch">
+					  <input type="checkbox" id="p1handle">
+					  <span class="slider" onClick="p1handle()"></span></label></td>
+				  <td align="center" width="10%"><h2><i class="fab fa-twitter"></i></h2></td>
+				  <td align="center"><input type="text" id="p1cnctwit" class="p1inputbox" placeholder="TWITTER/TWICH" autocomplete="off" tabindex="4" onBlur="updp1twit()" onKeyDown="checker()"></td>
+				  <td align="center"><input type="text" id="p1cncpro2" class="p1inputbox pronouns" placeholder="them" autocomplete="off" tabindex="3" onBlur="updp1pro2()"></td>
+				</tr>
+				<tr>
+				  <td align="center" colspan="2"><h4>PARTNER?</h4></td>
+				  <td align="center" colspan="1"><input type="checkbox" id="p1partyes" class="p1c" onMouseUp="p1partyes()"></td>
+				  <td align="center" colspan="4"><input type="text" id="p1commname" class="p1inputbox p1comms" placeholder="PLAYER 1 COMMANDER" autocomplete="off" tabindex="5"></td>
+				</tr>
+				<tr height="0px">
+				  <td colspan="3"></td>
+				  <td align="center" colspan="4"><input type="text" id="p1partname" class="p1inputbox partner1 p1parts" placeholder="PLAYER 1 PARTNER" autocomplete="off" tabindex="6"></td>
+				</tr>
+			  </table></td>
+		  </tr>
+		  <tr>
+			<td align="center" colspan="4"><h2>LIFE</h2></td>
+			<td align="center" colspan="1"><h2><i class="ms ms-p"></i></h2></td>
+			<td align="center" colspan="3"><h2>TAX</h2></td>
+		  </tr>
+		  <tr>
+			<td colspan="4" width="50%"><table width="100%" class="tlife">
+				<tr>
+				  <td><button onclick="p1lifeup1()" class="life"><i class="fas fa-arrow-up"></i> 1</button></td>
+				  <td><button onclick="p1lifeup5()" class="life"><i class="fas fa-arrow-up"></i> 5</button></td>
+				  <td><button onclick="p1lifeup10()" class="life"><i class="fas fa-arrow-up"></i> 10</button></td>
+				</tr>
+				<tr>
+				  <td colspan="3" align="center"><input type="number" id="p1life" class="life" autocomplete="off" onBlur="updp1life()"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1lifedown1()" class="life"><i class="fas fa-arrow-down"></i> 1</button></td>
+				  <td><button onclick="p1lifedown5()" class="life"><i class="fas fa-arrow-down"></i> 5</button></td>
+				  <td><button onclick="p1lifedown10()" class="life"><i class="fas fa-arrow-down"></i> 10</button></td>
+				</tr>
+			  </table></td>
+			<td colspan="1" width="12.5%"><table width="100%" class="tpoison" height="116px">
+				<tr>
+				  <td><button onclick="p1poisionup()" class="poison"><i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p1poison"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1poisiondown()" class="poison"><i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td colspan="3" width="37.5%"><table width="100%" class="ttax">
+				<tr>
+				  <td><button onclick="p1ccup()" class="cmdr" title="Commander Tax + 2">C <i class="fas fa-arrow-up"></i> 2</button></td>
+				  <td><button onclick="p1pcup()" class="cmdr partner1" title="Partner Tax + 2">P <i class="fas fa-arrow-up"></i> 2</button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p1-cc"></td>
+				  <td align="center" id="p1-pc" class="partner1"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1ccdown()" class="cmdr" title="Commander Tax - 2">C <i class="fas fa-arrow-down"></i> 2</button></td>
+				  <td><button onclick="p1pcdown()" class="cmdr partner1" title="Partner Tax - 2">P <i class="fas fa-arrow-down"></i> 2</button></td>
+				</tr>
+			  </table></td>
+		  </tr>
+		  <tr>
+			<td colspan="8" align="center"><h2>COMMANDER DAMAGE RECEIVED FROM:</h2></td>
+		  </tr>
+		  <tr height="220">
+			<td valign="top" colspan="2" width="25%"><table width="100%" class="tp1">
+				<tr>
+				  <td align="center"><h2>P1</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1cd1up()" class="p1">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p1-cd-p1"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1cd1down()" class="p1">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner1"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1pd1up()" class="p1 partner1">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p1-pd-p1" class="partner1"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1pd1down()" class="p1 partner1">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td valign="top" colspan="2" width="25%"><table width="100%" class="tp2">
+				<tr>
+				  <td align="center"><h2>P2</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1cd2up()" class="p2">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p1-cd-p2"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1cd2down()" class="p2">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner2"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1pd2up()" class="p2 partner2">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p1-pd-p2" class="partner2"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1pd2down()" class="p2 partner2">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td valign="top" colspan="2" width="25%"><table width="100%" class="tp3">
+				<tr>
+				  <td align="center"><h2>P3</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1cd3up()" class="p3">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p1-cd-p3"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1cd3down()" class="p3">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner3"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1pd3up()" class="p3 partner3">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p1-pd-p3" class="partner3"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1pd3down()" class="p3 partner3">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td valign="top" colspan="2" width="25%"><table width="100%" class="tp4">
+				<tr>
+				  <td align="center"><h2>P4</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1cd4up()" class="p4">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p1-cd-p4"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1cd4down()" class="p4">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner4"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1pd4up()" class="p4 partner4">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p1-pd-p4" class="partner4"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p1pd4down()" class="p4 partner4">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+		  </tr>
+		</table></td>
+	</tr>
+	<tr id="p2hide">
+	  <td class="sidebar2 node" valign="top" colspan="4"><table class="dashboard">
+		  <tr valign="top" height="126px">
+			<td align="center" colspan="8"><table class="tp2" width="100%">
+				<tr>
+				  <td align="center" width="22%" colspan="3"><h3>P2</h3></td>
+				  <td align="center" width="60%"><input type="text" id="p2cncname" class="p2inputbox" placeholder="PLAYER 2 NAME" autocomplete="off" tabindex="7" onBlur="updp2name()"></td>
+				  <td align="center" width="18%"><input type="text" id="p2cncpro1" class="p2inputbox pronouns" placeholder="they" autocomplete="off" tabindex="8" onBlur="updp2pro1()"></td>
+				</tr>
+				<tr>
+				  <td align="center" width="10%"><h2><i class="fab fa-twitch"></i></h2></td>
+				  <td align="center"><label class="switch">
+					  <input type="checkbox" id="p2handle">
+					  <span class="slider" onClick="p2handle()"></span></label></td>
+				  <td align="center" width="10%"><h2><i class="fab fa-twitter"></i></h2></td>
+				  <td align="center"><input type="text" id="p2cnctwit" class="p2inputbox" placeholder="TWITTER/TWICH" autocomplete="off" tabindex="4" onBlur="updp2twit()" onKeyDown="checker()"></td>
+				  <td align="center"><input type="text" id="p2cncpro2" class="p2inputbox pronouns" placeholder="them" autocomplete="off" tabindex="3" onBlur="updp2pro2()"></td>
+				</tr>
+				<tr>
+				  <td align="center" colspan="2"><h4>PARTNER?</h4></td>
+				  <td align="center" colspan="1"><input type="checkbox" id="p2partyes" class="p2c" onMouseUp="p2partyes()"></td>
+				  <td align="center" colspan="4"><input type="text" id="p2commname" class="p2inputbox p2comms" placeholder="PLAYER 2 COMMANDER" autocomplete="off" tabindex="5"></td>
+				</tr>
+				<tr height="0px">
+				  <td colspan="3"></td>
+				  <td align="center" colspan="4"><input type="text" id="p2partname" class="p2inputbox partner2 p2parts" placeholder="PLAYER 2 PARTNER" autocomplete="off" tabindex="6"></td>
+				</tr>
+			  </table></td>
+		  </tr>
+		  <tr>
+			<td align="center" colspan="4"><h2>LIFE</h2></td>
+			<td align="center" colspan="1"><h2><i class="ms ms-p"></i></h2></td>
+			<td align="center" colspan="3"><h2>TAX</h2></td>
+		  </tr>
+		  <tr>
+			<td colspan="4" width="50%"><table width="100%" class="tlife">
+				<tr>
+				  <td><button onclick="p2lifeup1()" class="life"><i class="fas fa-arrow-up"></i> 1</button></td>
+				  <td><button onclick="p2lifeup5()" class="life"><i class="fas fa-arrow-up"></i> 5</button></td>
+				  <td><button onclick="p2lifeup10()" class="life"><i class="fas fa-arrow-up"></i> 10</button></td>
+				</tr>
+				<tr>
+				  <td colspan="3" align="center"><input type="number" id="p2life" class="life" autocomplete="off" onBlur="updp2life()"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2lifedown1()" class="life"><i class="fas fa-arrow-down"></i> 1</button></td>
+				  <td><button onclick="p2lifedown5()" class="life"><i class="fas fa-arrow-down"></i> 5</button></td>
+				  <td><button onclick="p2lifedown10()" class="life"><i class="fas fa-arrow-down"></i> 10</button></td>
+				</tr>
+			  </table></td>
+			<td colspan="1" width="12.5%"><table width="100%" class="tpoison" height="116px">
+				<tr>
+				  <td><button onclick="p2poisionup()" class="poison"><i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p2poison"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2poisiondown()" class="poison"><i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td colspan="3" width="37.5%"><table width="100%" class="ttax">
+				<tr>
+				  <td><button onclick="p2ccup()" class="cmdr" title="Commander Tax + 2">C <i class="fas fa-arrow-up"></i> 2</button></td>
+				  <td><button onclick="p2pcup()" class="cmdr partner2" title="Partner Tax + 2">P <i class="fas fa-arrow-up"></i> 2</button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p2-cc"></td>
+				  <td align="center" id="p2-pc" class="partner2"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2ccdown()" class="cmdr" title="Commander Tax - 2">C <i class="fas fa-arrow-down"></i> 2</button></td>
+				  <td><button onclick="p2pcdown()" class="cmdr partner2" title="Partner Tax - 2">P <i class="fas fa-arrow-down"></i> 2</button></td>
+				</tr>
+			  </table></td>
+		  </tr>
+		  <tr>
+			<td colspan="8" align="center"><h2>COMMANDER DAMAGE RECEIVED FROM:</h2></td>
+		  </tr>
+		  <tr height="220">
+			<td valign="top" colspan="2" width="25%"><table width="100%" class="tp1">
+				<tr>
+				  <td align="center"><h2>P1</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2cd1up()" class="p1">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p2-cd-p1"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2cd1down()" class="p1">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner1"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2pd1up()" class="p1 partner1">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p2-pd-p1" class="partner1"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2pd1down()" class="p1 partner1">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td valign="top" colspan="2" width="25%"><table width="100%" class="tp2">
+				<tr>
+				  <td align="center"><h2>P2</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2cd2up()" class="p2">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p2-cd-p2"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2cd2down()" class="p2">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner2"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2pd2up()" class="p2 partner2">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p2-pd-p2" class="partner2"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2pd2down()" class="p2 partner2">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td valign="top" colspan="2" width="25%"><table width="100%" class="tp3">
+				<tr>
+				  <td align="center"><h2>P3</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2cd3up()" class="p3">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p2-cd-p3"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2cd3down()" class="p3">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner3"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2pd3up()" class="p3 partner3">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p2-pd-p3" class="partner3"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2pd3down()" class="p3 partner3">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td valign="top" colspan="2" width="25%"><table width="100%" class="tp4">
+				<tr>
+				  <td align="center"><h2>P4</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2cd4up()" class="p4">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p2-cd-p4"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2cd4down()" class="p4">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner4"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2pd4up()" class="p4 partner4">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p2-pd-p4" class="partner4"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p2pd4down()" class="p4 partner4">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+		  </tr>
+		</table></td>
+	</tr>
+	<tr id="p3hide" class="hidden">
+	  <td class="sidebar3 node" valign="top" colspan="4"><table class="dashboard">
+		  <tr valign="top" height="126px">
+			<td align="center" colspan="8"><table class="tp3" width="100%">
+				<tr>
+				  <td align="center" width="22%" colspan="3"><h3>P3</h3></td>
+				  <td align="center" width="60%"><input type="text" id="p3cncname" class="p3inputbox" placeholder="PLAYER 3 NAME" autocomplete="off" tabindex="1" onBlur="updp3name()"></td>
+				  <td align="center" width="18%"><input type="text" id="p3cncpro1" class="p3inputbox pronouns" placeholder="they" autocomplete="off" tabindex="2" onBlur="updp3pro1()"></td>
+				</tr>
+				<tr>
+				  <td align="center" width="10%"><h2><i class="fab fa-twitch"></i></h2></td>
+				  <td align="center"><label class="switch">
+					  <input type="checkbox" id="p3handle">
+					  <span class="slider" onClick="p3handle()"></span></label></td>
+				  <td align="center" width="10%"><h2><i class="fab fa-twitter"></i></h2></td>
+				  <td align="center"><input type="text" id="p3cnctwit" class="p3inputbox" placeholder="TWITTER/TWICH" autocomplete="off" tabindex="4" onBlur="updp3twit()" onKeyDown="checker()"></td>
+				  <td align="center"><input type="text" id="p3cncpro2" class="p3inputbox pronouns" placeholder="them" autocomplete="off" tabindex="3" onBlur="updp3pro2()"></td>
+				</tr>
+				<tr>
+				  <td align="center" colspan="2"><h4>PARTNER?</h4></td>
+				  <td align="center" colspan="1"><input type="checkbox" id="p3partyes" class="p3c" onMouseUp="p3partyes()"></td>
+				  <td align="center" colspan="4"><input type="text" id="p3commname" class="p3inputbox p3comms" placeholder="PLAYER 3 COMMANDER" autocomplete="off" tabindex="5"></td>
+				</tr>
+				<tr height="0px">
+				  <td colspan="3"></td>
+				  <td align="center" colspan="4"><input type="text" id="p3partname" class="p3inputbox partner3 p3parts" placeholder="PLAYER 3 PARTNER" autocomplete="off" tabindex="6"></td>
+				</tr>
+			  </table></td>
+		  </tr>
+		  <tr>
+			<td align="center" colspan="4"><h2>LIFE</h2></td>
+			<td align="center" colspan="1"><h2><i class="ms ms-p"></i></h2></td>
+			<td align="center" colspan="3"><h2>TAX</h2></td>
+		  </tr>
+		  <tr>
+			<td colspan="4" width="50%"><table width="100%" class="tlife">
+				<tr>
+				  <td><button onclick="p3lifeup1()" class="life"><i class="fas fa-arrow-up"></i> 1</button></td>
+				  <td><button onclick="p3lifeup5()" class="life"><i class="fas fa-arrow-up"></i> 5</button></td>
+				  <td><button onclick="p3lifeup10()" class="life"><i class="fas fa-arrow-up"></i> 10</button></td>
+				</tr>
+				<tr>
+				  <td colspan="3" align="center"><input type="number" id="p3life" class="life" autocomplete="off" onBlur="updp3life()"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3lifedown1()" class="life"><i class="fas fa-arrow-down"></i> 1</button></td>
+				  <td><button onclick="p3lifedown5()" class="life"><i class="fas fa-arrow-down"></i> 5</button></td>
+				  <td><button onclick="p3lifedown10()" class="life"><i class="fas fa-arrow-down"></i> 10</button></td>
+				</tr>
+			  </table></td>
+			<td colspan="1" width="12.5%"><table width="100%" class="tpoison" height="116px">
+				<tr>
+				  <td><button onclick="p3poisionup()" class="poison"><i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p3poison"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3poisiondown()" class="poison"><i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td colspan="3" width="37.5%"><table width="100%" class="ttax">
+				<tr>
+				  <td><button onclick="p3ccup()" class="cmdr" title="Commander Tax + 2">C <i class="fas fa-arrow-up"></i> 2</button></td>
+				  <td><button onclick="p3pcup()" class="cmdr partner3" title="Partner Tax + 2">P <i class="fas fa-arrow-up"></i> 2</button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p3-cc"></td>
+				  <td align="center" id="p3-pc" class="partner3"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3ccdown()" class="cmdr" title="Commander Tax - 2">C <i class="fas fa-arrow-down"></i> 2</button></td>
+				  <td><button onclick="p3pcdown()" class="cmdr partner3" title="Partner Tax - 2">P <i class="fas fa-arrow-down"></i> 2</button></td>
+				</tr>
+			  </table></td>
+		  </tr>
+		  <tr>
+			<td colspan="8" align="center"><h2>COMMANDER DAMAGE RECEIVED FROM:</h2></td>
+		  </tr>
+		  <tr height="220">
+			<td valign="top" width="25%" colspan="2"><table width="100%" class="tp1">
+				<tr>
+				  <td align="center"><h2>P1</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3cd1up()" class="p1">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p3-cd-p1"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3cd1down()" class="p1">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner1"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3pd1up()" class="p1 partner1">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p3-pd-p1" class="partner1"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3pd1down()" class="p1 partner1">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td valign="top" width="25%" colspan="2"><table width="100%" class="tp2">
+				<tr>
+				  <td align="center"><h2>P2</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3cd2up()" class="p2">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p3-cd-p2"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3cd2down()" class="p2">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner2"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3pd2up()" class="p2 partner2">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p3-pd-p2" class="partner2"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3pd2down()" class="p2 partner2">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td valign="top" width="25%" colspan="2"><table width="100%" class="tp3">
+				<tr>
+				  <td align="center"><h2>P3</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3cd3up()" class="p3">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p3-cd-p3"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3cd3down()" class="p3">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner3"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3pd3up()" class="p3 partner3">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p3-pd-p3" class="partner3"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3pd3down()" class="p3 partner3">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td valign="top" width="25%" colspan="2"><table width="100%" class="tp4">
+				<tr>
+				  <td align="center"><h2>P4</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3cd4up()" class="p4">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p3-cd-p4"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3cd4down()" class="p4">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner4"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3pd4up()" class="p4 partner4">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p3-pd-p4" class="partner4"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p3pd4down()" class="p4 partner4">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+		  </tr>
+		</table></td>
+	</tr>
+	<tr id="p4hide" class="hidden">
+	  <td class="sidebar4 node" valign="top" colspan="4"><table class="dashboard">
+		  <tr valign="top" height="126px">
+			<td align="center" colspan="8"><table class="tp4" width="100%">
+				<tr>
+				  <td align="center" width="22%" colspan="3"><h2>P4</h2></td>
+				  <td align="center" width="60%"><input type="text" id="p4cncname" class="p4inputbox" placeholder="PLAYER 4 NAME" autocomplete="off" tabindex="1" onBlur="updp4name()"></td>
+				  <td align="center" width="18%"><input type="text" id="p4cncpro1" class="p4inputbox pronouns" placeholder="they" autocomplete="off" tabindex="2" onBlur="updp4pro1()"></td>
+				</tr>
+				<tr>
+				  <td align="center" width="10%"><h2><i class="fab fa-twitch"></i></h2></td>
+				  <td align="center"><label class="switch">
+					  <input type="checkbox" id="p4handle">
+					  <span class="slider" onClick="p4handle()"></span></label></td>
+				  <td align="center" width="10%"><h2><i class="fab fa-twitter"></i></h2></td>
+				  <td align="center"><input type="text" id="p4cnctwit" class="p4inputbox" placeholder="TWITTER/TWICH" autocomplete="off" tabindex="4" onBlur="updp4twit()" onKeyDown="checker()"></td>
+				  <td align="center"><input type="text" id="p4cncpro2" class="p4inputbox pronouns" placeholder="them" autocomplete="off" tabindex="3" onBlur="updp4pro2()"></td>
+				</tr>
+				<tr>
+				  <td align="center" colspan="2"><h4>PARTNER?</h4></td>
+				  <td align="center" colspan="1"><input type="checkbox" id="p4partyes" class="p4c" onMouseUp="p4partyes()"></td>
+				  <td align="center" colspan="4"><input type="text" id="p4commname" class="p4inputbox p4comms" placeholder="PLAYER 4 COMMANDER" autocomplete="off" tabindex="5"></td>
+				</tr>
+				<tr height="0px">
+				  <td colspan="3"></td>
+				  <td align="center" colspan="4"><input type="text" id="p4partname" class="p4inputbox partner4 p4parts" placeholder="PLAYER 4 PARTNER" autocomplete="off" tabindex="6"></td>
+				</tr>
+			  </table></td>
+		  </tr>
+		  <tr>
+			<td align="center" colspan="4"><h2>LIFE</h2></td>
+			<td align="center" colspan="1"><h2><i class="ms ms-p"></i></h2></td>
+			<td align="center" colspan="3"><h2>TAX</h2></td>
+		  </tr>
+		  <tr>
+			<td colspan="4" width="50%"><table width="100%" class="tlife">
+				<tr>
+				  <td><button onclick="p4lifeup1()" class="life"><i class="fas fa-arrow-up"></i> 1</button></td>
+				  <td><button onclick="p4lifeup5()" class="life"><i class="fas fa-arrow-up"></i> 5</button></td>
+				  <td><button onclick="p4lifeup10()" class="life"><i class="fas fa-arrow-up"></i> 10</button></td>
+				</tr>
+				<tr>
+				  <td colspan="3" align="center"><input type="number" id="p4life" class="life" autocomplete="off" onBlur="updp4life()"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4lifedown1()" class="life"><i class="fas fa-arrow-down"></i> 1</button></td>
+				  <td><button onclick="p4lifedown5()" class="life"><i class="fas fa-arrow-down"></i> 5</button></td>
+				  <td><button onclick="p4lifedown10()" class="life"><i class="fas fa-arrow-down"></i> 10</button></td>
+				</tr>
+			  </table></td>
+			<td colspan="1" width="12.5%"><table width="100%" class="tpoison" height="116px">
+				<tr>
+				  <td><button onclick="p4poisionup()" class="poison"><i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p4poison"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4poisiondown()" class="poison"><i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td colspan="3" width="37.5%"><table width="100%" class="ttax">
+				<tr>
+				  <td><button onclick="p4ccup()" class="cmdr" title="Commander Tax + 2">C <i class="fas fa-arrow-up"></i> 2</button></td>
+				  <td><button onclick="p4pcup()" class="cmdr partner4" title="Partner Tax + 2">P <i class="fas fa-arrow-up"></i> 2</button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p4-cc"></td>
+				  <td align="center" id="p4-pc" class="partner4"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4ccdown()" class="cmdr" title="Commander Tax - 2">C <i class="fas fa-arrow-down"></i> 2</button></td>
+				  <td><button onclick="p4pcdown()" class="cmdr partner4" title="Partner Tax - 2">P <i class="fas fa-arrow-down"></i> 2</button></td>
+				</tr>
+			  </table></td>
+		  </tr>
+		  <tr>
+			<td colspan="8" align="center"><h2>COMMANDER DAMAGE RECEIVED FROM:</h2></td>
+		  </tr>
+		  <tr height="210">
+			<td valign="top" colspan="2" width="25%"><table width="100%" class="tp1">
+				<tr>
+				  <td align="center"><h2>P1</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4cd1up()" class="p1">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p4-cd-p1"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4cd1down()" class="p1">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner1"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4pd1up()" class="p1 partner1">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p4-pd-p1" class="partner1"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4pd1down()" class="p1 partner1">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td valign="top" colspan="2" width="25%"><table width="100%" class="tp2">
+				<tr>
+				  <td align="center"><h2>P2</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4cd2up()" class="p2">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p4-cd-p2"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4cd2down()" class="p2">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner2"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4pd2up()" class="p2 partner2">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p4-pd-p2" class="partner2"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4pd2down()" class="p2 partner2">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td valign="top" colspan="2" width="25%"><table width="100%" class="tp3">
+				<tr>
+				  <td align="center"><h2>P3</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4cd3up()" class="p3">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p4-cd-p3"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4cd3down()" class="p3">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner3"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4pd3up()" class="p3 partner3">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p4-pd-p3" class="partner3"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4pd3down()" class="p3 partner3">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+			<td valign="top" colspan="2" width="25%"><table width="100%" class="tp4">
+				<tr>
+				  <td align="center"><h2>P4</h2></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4cd4up()" class="p4">C &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p4-cd-p4"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4cd4down()" class="p4">C &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+				<tr>
+				  <td class="partner4"><hr></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4pd4up()" class="p4 partner4">P &nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button></td>
+				</tr>
+				<tr>
+				  <td align="center" id="p4-pd-p4" class="partner4"></td>
+				</tr>
+				<tr>
+				  <td><button onclick="p4pd4down()" class="p4 partner4">P &nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button></td>
+				</tr>
+			  </table></td>
+		  </tr>
+		</table></td>
+	</tr>
+</table>
+<script src="scripts/notnode1.js"></script> 
+<script src="scripts/notnode2.js"></script> 
+<script src="scripts/notnode3.js"></script> 
+<script src="scripts/notnode4.js"></script> 
+<script src="scripts/inputreturns.js"></script> 
+</body>
+</html>

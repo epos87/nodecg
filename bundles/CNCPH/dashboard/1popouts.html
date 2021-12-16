@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<!-- required libraries --> 
+<script src="https://kit.fontawesome.com/1520623b67.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
+<link href="//cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<!-- meta -->
+<title>C&amp;C PowerHour - Player 1 Dashboard</title>
+<meta name="copyright" content="©2021 CNCPH, LLC">
+<meta name="title" content="C&C PowerHour Dashboard">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/ico" href="img/favicon.png">
+<!-- custom files -->
+<link href="styles/popouts.css" rel="stylesheet" type="text/css">
+<link href="../graphics/" rel="stylesheet" type="text/css">
+<script src="scripts/scry.js"></script> 
+<script src="scripts/toggles.js"></script> 
+<script src="scripts/popinputs.js"></script> 
+</head>
+<body>
+<div id="lpopouts">
+  <div id="scrywrap" class="poptog" width="302">
+    <table>
+      <tr>
+        <td align="center"><input type="text" id="cardimage" autocomplete="off" placeholder="Search Scryfall"></td>
+      </tr>
+      <tr>
+        <td align="center"><img id="cardread" src="../graphics/mtg-card-back.png" alt="magic card"></td>
+      </tr>
+      <tr>
+        <td align="center"><button onclick="flipcard();" id="flipCard" class="reset" style="font-size:9px; letter-spacing: normal; max-width:267px;">Flip Card <i class="fas fa-sync"></i></button></td>
+      </tr>
+    </table>
+  </div>
+  <div id="planwrap" class="poptog">
+    <table>
+      <tr>
+        <td width="430px"><img id="planereader" src="../graphics/planechase.png" alt="magic card" class="lplanereader"></td>
+        <td valign="bottom"><button type="button" id="roll-button" class="reset" onclick="rollplane()">Roll <i class="fas fa-sync"></i></button></td>
+      </tr>
+    </table>
+  </div>
+  <div id="dicewrap" class="poptog">
+    <table>
+      <tr>
+        <td><button type="button" id="roll-d61" class="reset" onclick="d61()">Roll 2d6 <i class="fas fa-sync"></i></button></td>
+      </tr>
+      <tr>
+        <td><button type="button" id="flip-coin1" class="reset" onclick="coin1()">Flip Coin <i class="fas fa-sync"></i></button></td>
+      </tr>
+    </table>
+  </div>
+  <div id="festwrap" class="poptog">
+    <table>
+      <tr>
+        <td class="framewrap2"><iframe src="https://festify.us/party/-MTcStTNyqyVNf3WvMNI" class="festframe"></iframe></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div id="lpopbuttons">
+  <table>
+    <tr><td><button class="poptoggles scry" type="button" onClick="poptoggle(event, 'scrywrap')"></button></td></tr>
+    <tr><td><button class="poptoggles plane" type="button" onClick="poptoggle(event, 'planwrap')"></button></td></tr>
+    <tr><td><button class="poptoggles dice" type="button" onClick="poptoggle(event, 'dicewrap')" style="font-size:.8em;"></button></td></tr>
+    <tr><td><button class="poptoggles spotify" type="button" onClick="poptoggle(event, 'festwrap')"></button></td></tr>
+    <tr><td><button class="poptoggles fas fa-chevron-circle-left" type="button" onClick="pop()"></button></td></tr>
+  </table>
+</div>
+<script src="scripts/findplane.js"></script>
+<script src="scripts/popreturns.js"></script>
+<script src="scripts/scryreturn.js"></script>
+</body>
+</html>
