@@ -1,0 +1,178 @@
+{
+  "name": "CNCPH",
+  "version": "1.0.1",
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "dashboardPanels": [
+      {
+        "name": "P1 Frame",
+        "title": "P1 Frame",
+        "width": 2,
+        "file": "p1.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "P2 Frame",
+        "title": "P2 Frame",
+        "width": 2,
+        "file": "p2.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "NPtemp",
+        "title": "NPtemp",
+        "width": 2,
+        "file": "npdash.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "P1temp",
+        "title": "P1temp",
+        "width": 2,
+        "file": "p1dash.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "P3temp",
+        "title": "P3temp",
+        "width": 2,
+        "file": "p3dash.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "P4temp",
+        "title": "P4temp",
+        "width": 2,
+        "file": "p4dash.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "P3 Frame",
+        "title": "P3 Frame",
+        "width": 2,
+        "file": "p3.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "P4 Frame",
+        "title": "P4 Frame",
+        "width": 2,
+        "file": "p4.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "NP",
+        "title": "NP Control",
+        "width": 2,
+        "file": "np.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "1Popouts",
+        "title": "1Popouts",
+        "width": 2,
+        "file": "1popouts.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "2Popouts",
+        "title": "2Popouts",
+        "width": 2,
+        "file": "2popouts.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "2P-Popouts",
+        "title": "2P-Popouts",
+        "width": 2,
+        "file": "2ppopouts.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "3Popouts",
+        "title": "3Popouts",
+        "width": 2,
+        "file": "3popouts.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "4Popouts",
+        "title": "4Popouts",
+        "width": 2,
+        "file": "4popouts.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "NPopouts",
+        "title": "NPopouts",
+        "width": 2,
+        "file": "npopouts.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "Select",
+        "title": "Select",
+        "width": 2,
+        "file": "select.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "Two Player",
+        "title": "Two Player",
+        "width": 2,
+        "file": "two.html",
+        "headerColor": "#525F78"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "overlay.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "overlay2p.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "just-card.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "just-plane.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "overlay-oath.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "overlay-2hg.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "overlay-card.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
+  },
+  "dependencies": {
+    "gsap": "^3.0.1"
+  }
+}
